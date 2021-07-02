@@ -9,9 +9,8 @@ import UIKit
 
 final class TimerViewController: UIViewController {
 
-    
+    // MARK: - Private Properties
     @IBOutlet weak var picker: UIPickerView!
-    
     private var hour: Int = 0
     private var minutes: Int = 0
     private var seconds: Int = 0
@@ -29,6 +28,7 @@ final class TimerViewController: UIViewController {
 
 }
 
+//MARK: - extension TimerViewController
 extension TimerViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
