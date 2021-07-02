@@ -7,45 +7,64 @@
 
 import UIKit
 
-class paymentController: UIViewController {
+final class PaymentController: UIViewController {
     
-    //MARK: - Public variables
-    var deliveryLabel = UILabel()
-    var orderLabel = UILabel()
-    var payButton = UIButton()
-    var cardPaymentLabel = UILabel()
-    var cashPaymentLabel = UILabel()
-    var cardSwitch = UISwitch()
-    var cashSwitch = UISwitch()
-    var ingridientsLabel = UILabel()
-    
-    var chosenPizzaName = UILabel()
-    var text: String = ""
+    // MARK: - Private Properties
 
-    var chosenMozarella = UILabel()
+    //MARK: - deliveryLabel
+    private var deliveryLabel = UILabel()
+    //MARK: - orderLabel
+    private var orderLabel = UILabel()
+    //MARK: - payButton
+    private var payButton = UIButton()
+    //MARK: - cardPaymentLabel
+    private var cardPaymentLabel = UILabel()
+    //MARK: - cashPaymentLabel
+    private var cashPaymentLabel = UILabel()
+    //MARK: - cardSwitch
+    private var cardSwitch = UISwitch()
+    //MARK: - cashSwitch
+    private var cashSwitch = UISwitch()
+    //MARK: - ingridientsLabel
+    private var ingridientsLabel = UILabel()
+    //MARK: - chosenPizzaName
+    private var chosenPizzaName = UILabel()
+
+    //MARK: - chosenMozarellaLabel
+    private var chosenMozarella = UILabel()
+    
+    //MARK: - chosenHamLabel
+    private var chosenHam = UILabel()
+    
+    //MARK: - chosenShroomsLabel
+    private var chosenShrooms = UILabel()
+    
+    //MARK: - chosenOlivesLabel
+    private var chosenOlives = UILabel()
+
+    //MARK: - delegate
+    var delegate: GoToRoot?
+    
+    //MARK: - Public Properties
+    var text: String = ""
     var mozarellaText: String = ""
-    
-    var chosenHam = UILabel()
     var hamText: String = ""
-    
-    var chosenShrooms = UILabel()
     var shroomsText: String = ""
-    
-    var chosenOlives = UILabel()
     var olivesText: String = ""
 
-    
-    var delegate: goToRoot?
         
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
+        // MARK: - Visual Components
+        //MARK: - deliveryLabel
         deliveryLabel.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
         deliveryLabel.text = "Доставка"
         deliveryLabel.textAlignment = .center
         navigationItem.titleView = deliveryLabel
         
+        //MARK: - orderLabel
         orderLabel.frame = CGRect(x: 35, y: 130, width: 200, height: 50)
         orderLabel.text = "Ваш заказ:"
         orderLabel.font = .systemFont(ofSize: 30)
@@ -53,6 +72,7 @@ class paymentController: UIViewController {
         orderLabel.textColor = .black
         view.addSubview(orderLabel)
         
+        //MARK: - cardPaymentLabel
         cardPaymentLabel.frame = CGRect(x: 70, y: 630, width: 200, height: 50)
         cardPaymentLabel.text = "Оплата картой"
         cardPaymentLabel.font = .systemFont(ofSize: 25)
@@ -60,10 +80,12 @@ class paymentController: UIViewController {
         cardPaymentLabel.textColor = .black
         view.addSubview(cardPaymentLabel)
         
+        //MARK: - cardSwitch
         cardSwitch.frame = CGRect(x: 300, y: 640, width: 0, height: 0)
         cardSwitch.addTarget(self, action: #selector(switches(paramTarget:)), for: .valueChanged)
         view.addSubview(cardSwitch)
         
+        //MARK: - cashPaymentLabel
         cashPaymentLabel.frame = CGRect(x: 70, y: 680, width: 200, height: 50)
         cashPaymentLabel.text = "Наличными"
         cashPaymentLabel.font = .systemFont(ofSize: 25)
@@ -71,10 +93,12 @@ class paymentController: UIViewController {
         cashPaymentLabel.textColor = .black
         view.addSubview(cashPaymentLabel)
         
+        //MARK: - cashSwitch
         cashSwitch.frame = CGRect(x: 300, y: 690, width: 0, height: 0)
         cashSwitch.addTarget(self, action: #selector(switches(paramTarget:)), for: .valueChanged)
         view.addSubview(cashSwitch)
         
+        //MARK: - payButton
         payButton.frame = CGRect(x: 55, y: 750, width: 300, height: 50)
         payButton.setBackgroundImage(UIImage(systemName: "applelogo"), for: .normal)
         payButton.layoutIfNeeded()
@@ -88,6 +112,7 @@ class paymentController: UIViewController {
         payButton.addTarget(self, action: #selector(alert), for: .touchUpInside)
         view.addSubview(payButton)
         
+        //MARK: - chosenPizzaName
         chosenPizzaName.frame = CGRect(x: 35, y: 130, width: 200, height: 50)
         chosenPizzaName.text = text
         chosenPizzaName.font = .systemFont(ofSize: 30)
@@ -95,6 +120,7 @@ class paymentController: UIViewController {
         chosenPizzaName.textColor = .black
         view.addSubview(chosenPizzaName)
         
+        //MARK: - ingridientsLabel
         ingridientsLabel.frame = CGRect(x: 100, y: 200, width: 300, height: 50)
         ingridientsLabel.text = "Ингредиенты:"
         ingridientsLabel.font = .systemFont(ofSize: 30)
@@ -102,6 +128,7 @@ class paymentController: UIViewController {
         ingridientsLabel.textColor = .black
         view.addSubview(ingridientsLabel)
         
+        //MARK: - chosenMozarellaLabel
         chosenMozarella.frame = CGRect(x: 35, y: 250, width: 300, height: 50)
         chosenMozarella.text = mozarellaText
         chosenMozarella.font = .systemFont(ofSize: 25)
@@ -109,6 +136,7 @@ class paymentController: UIViewController {
         chosenMozarella.textColor = .black
         view.addSubview(chosenMozarella)
         
+        //MARK: - chosenHamLabel
         chosenHam.frame = CGRect(x: 35, y: 300, width: 300, height: 50)
         chosenHam.text = hamText
         chosenHam.font = .systemFont(ofSize: 25)
@@ -116,6 +144,7 @@ class paymentController: UIViewController {
         chosenHam.textColor = .black
         view.addSubview(chosenHam)
         
+        //MARK: - chosenShroomsLabel
         chosenShrooms.frame = CGRect(x: 35, y: 350, width: 300, height: 50)
         chosenShrooms.text = shroomsText
         chosenShrooms.font = .systemFont(ofSize: 25)
@@ -123,6 +152,7 @@ class paymentController: UIViewController {
         chosenShrooms.textColor = .black
         view.addSubview(chosenShrooms)
         
+        //MARK: - chosenOlivesLabel
         chosenOlives.frame = CGRect(x: 35, y: 400, width: 300, height: 50)
         chosenOlives.text = olivesText
         chosenOlives.font = .systemFont(ofSize: 25)
@@ -142,6 +172,7 @@ class paymentController: UIViewController {
         }
     }
     
+    //MARK: - alertController for payButton
     @objc func alert() {
         let alertController = UIAlertController(title: "Заказ оплачен", message: "Ваш заказ доставят в течение 15 минут! Приятного аппетита", preferredStyle: .alert)
         let action = UIAlertAction(title: "ОК", style: .cancel) { (action) in
