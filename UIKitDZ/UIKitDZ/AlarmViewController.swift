@@ -9,12 +9,4 @@ import UIKit
 
 final class AlarmViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-    
-
-
-
 }

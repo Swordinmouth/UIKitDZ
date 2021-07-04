@@ -11,8 +11,12 @@ final class TimerViewController: UIViewController {
 
     // MARK: - Private Properties
     @IBOutlet weak var picker: UIPickerView!
+    
+    // MARK: - hour
     private var hour: Int = 0
+    // MARK: - minutes
     private var minutes: Int = 0
+    // MARK: - seconds
     private var seconds: Int = 0
     
     override func viewDidLoad() {
@@ -22,9 +26,6 @@ final class TimerViewController: UIViewController {
         self.picker.delegate = self
         
     }
-    
-
-
 
 }
 
