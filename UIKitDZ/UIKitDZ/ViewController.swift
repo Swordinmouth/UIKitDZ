@@ -11,41 +11,24 @@ final class ViewController: UIViewController {
     
     // MARK: - Private properties
     
-    // MARK: - barImage
     private var barImage = UIImage(systemName: "plus.message.fill")
-    // MARK: - wordImage
     private var wordImage = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
-    // MARK: - wordLabel
     private var wordLabel = UILabel()
-    // MARK: - colorLabel
     private var colorLabel = UILabel()
-    // MARK: - colorPicker
     private var colorPicker = UIPickerView()
-    // MARK: - fontLabel
     private var fontLabel = UILabel()
-    // MARK: - fontPicker
     private var fontPicker = UIPickerView()
-    // MARK: - sizeSlider
     private var sizeSlider = UISlider()
-    // MARK: - linesLabel
     private var linesLabel = UILabel()
-    // MARK: - linesPicker
     private var linesPicker = UIPickerView()
-    // MARK: - shadowsLabel
     private var shadowsLabel = UILabel()
-    // MARK: - shadowsSwitch
     private var shadowsSwitch = UISwitch()
 
-    // MARK: - Data source for colorPickerView
-    private var colorArray = ["Зеленый", "Желтый", "Красный", "Черный", "Березовый", "Серый", "Розовый"]
-    // MARK: - Data source for fontPickerView
-    private var fontArray = ["Arial", "Helvetica", "Bradley Hand", "Optima", "Papyrus", "Times New Roman", "Zapfino"]
-    // MARK: - Data source for linesPickerView
-    private var linesArray = ["1", "2", "3", "4", "5", "6", "7"]
+    private var colors = ["Зеленый", "Желтый", "Красный", "Черный", "Березовый", "Серый", "Розовый"]
+    private var fonts = ["Arial", "Helvetica", "Bradley Hand", "Optima", "Papyrus", "Times New Roman", "Zapfino"]
+    private var lines = ["1", "2", "3", "4", "5", "6", "7"]
     
-    // MARK: - font for label
     private var currentFont = "Arial"
-    // MARK: - textsize for label
     private var currentTextSize: CGFloat = 15.0
             
     override func viewDidLoad() {
@@ -166,7 +149,7 @@ extension ViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        colorArray.count
+        colors.count
     }
 }
 
@@ -175,11 +158,11 @@ extension ViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView {
         case colorPicker:
-            return colorArray[row]
+            return colors[row]
         case linesPicker:
-            return linesArray[row]
+            return lines[row]
         case fontPicker:
-            return fontArray[row]
+            return fonts[row]
         default: break
         }
         return ""
