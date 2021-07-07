@@ -9,9 +9,9 @@ import UIKit
 
 final class ComedyMovieViewController: UIViewController {
     // MARK: - IBOutlet
-    @IBOutlet weak var languagePicker: UIPickerView!
-    @IBOutlet weak var subtitlesPicker: UIPickerView!
-    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet private var languagePicker: UIPickerView!
+    @IBOutlet private var subtitlesPicker: UIPickerView!
+    @IBOutlet private var playButton: UIButton!
 
     // MARK: - private properties
     private var language = ["Русский", "Английский", "Немецкий", "Украинский"]
@@ -31,7 +31,7 @@ final class ComedyMovieViewController: UIViewController {
     }
 
     // MARK: - IBAction
-    @IBAction func playButton(_ sender: UIButton) {
+    @IBAction private func playButton(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Сначала купи подписку", message: nil, preferredStyle: .alert)
         let action = UIAlertAction(title: "Хорошо", style: .default) { (action) in
 
@@ -40,7 +40,7 @@ final class ComedyMovieViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
         }
 
-    @IBAction func logOutButton(_ sender: UIBarButtonItem) {
+    @IBAction private func logOutButton(_ sender: UIBarButtonItem) {
         UserDefaults.standard.removeObject(forKey: "isRegistration")
         dismiss(animated: true)
     }

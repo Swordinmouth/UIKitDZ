@@ -10,10 +10,10 @@ import UIKit
 final class SignInViewController: UIViewController {
 
     // MARK: - IBOutlet
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var repeatPasswordTextField: UITextField!
+    @IBOutlet private var nameTextField: UITextField!
+    @IBOutlet private var emailTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
+    @IBOutlet private var repeatPasswordTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +24,10 @@ final class SignInViewController: UIViewController {
         repeatPasswordTextField.delegate = self
 
         // MARK: - Notifications
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (sender) in
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { _ in
             self.view.frame.origin.y = -100
         }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (sender) in
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { _ in
             self.view.frame.origin.y = 0
         }
     }
@@ -51,7 +51,7 @@ final class SignInViewController: UIViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyBoard.instantiateViewController(identifier: "tabBar")
         viewController.modalPresentationStyle = .fullScreen
-        self.present(viewController, animated: true)
+        present(viewController, animated: true)
     }
 }
 
@@ -73,7 +73,5 @@ extension SignInViewController: UITextFieldDelegate {
         default:
             return repeatPasswordTextField.resignFirstResponder()
         }
-    }
-    @objc func textFieldDidChange(sender: NSNotification) {
     }
 }

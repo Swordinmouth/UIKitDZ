@@ -9,9 +9,9 @@ import UIKit
 
 final class ActionMovieController: UIViewController {
     // MARK: - IBOutlet
-    @IBOutlet weak var languagePicker: UIPickerView!
-    @IBOutlet weak var subtitlesPicker: UIPickerView!
-    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet private var languagePicker: UIPickerView!
+    @IBOutlet private var subtitlesPicker: UIPickerView!
+    @IBOutlet private var playButton: UIButton!
 
     // MARK: - private properties
     private var language = ["Русский", "Английский", "Немецкий", "Украинский"]
@@ -29,16 +29,7 @@ final class ActionMovieController: UIViewController {
     }
 
     // MARK: - IBAction
-    @IBAction func playButton(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "Сначала купи подписку", message: nil, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Хорошо", style: .default) { (action) in
-
-        }
-        alertController.addAction(action)
-        self.present(alertController, animated: true, completion: nil)
-        }
-
-    @IBAction func logOutButton(_ sender: UIBarButtonItem) {
+    @IBAction private func logOutButton(_ sender: UIBarButtonItem) {
         UserDefaults.standard.removeObject(forKey: "isRegistration")
         dismiss(animated: true)
     }
@@ -67,4 +58,12 @@ extension ActionMovieController: UIPickerViewDelegate {
         }
         return ""
     }
+    @IBAction private func playButton(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Сначала купи подписку", message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Хорошо", style: .default) { (action) in
+
+        }
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
+        }
 }
