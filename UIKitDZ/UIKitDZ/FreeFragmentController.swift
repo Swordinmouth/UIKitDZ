@@ -10,56 +10,62 @@ import UIKit
 final class FreeFragmentController: UIViewController {
 
     //MARK: - Visual Components
-    private var freeFragment = UITextView()
-    private var fontPicker = UIPickerView()
-    private var fontsLabel = UILabel()
-    private var sizeLabel = UILabel()
-    private var minSizeButton = UIButton()
-    private var maxSizeButton = UIButton()
-    private var nightModeLabel = UILabel()
-    private var nightMode = UISwitch()
-    private var textColor = UILabel()
-    private var firstColor = UIButton()
-    private var secondColor = UIButton()
-    private var thirdColor = UIButton()
-    private var fourthColor = UIButton()
-    private var shareImage = UIImage(systemName: "arrowshape.turn.up.forward.fill")
-    private var shareButton = UIButton()
-    private var sizeSlider = UISlider()
+    private var freeFragmentTextView = UITextView()
+    private var fontUIPIckerView = UIPickerView()
+    private var fontsUILabel = UILabel()
+    private var sizeUILabel = UILabel()
+    private var minSizeUIButton = UIButton()
+    private var maxSizeUIButton = UIButton()
+    private var nightModeUILabel = UILabel()
+    private var nightModeUISwitch = UISwitch()
+    private var textColorUILabel = UILabel()
+    private var firstColorUIButton = UIButton()
+    private var secondColorUIButton = UIButton()
+    private var thirdColorUIButton = UIButton()
+    private var fourthColorUIButton = UIButton()
+    private var shareUIImage = UIImage(systemName: "arrowshape.turn.up.forward.fill")
+    private var shareUIButton = UIButton()
+    private var sizeUISlider = UISlider()
 
 
     //MARK: - Private Properties
     private var fonts = ["Bradley Hand", "Papyrus", "Times New Roman", "Zapfino"]
     private var curentFont = "Arial"
     private var curentSize: CGFloat = 15
-    private var weight = 0.15
+    private var weight = 1.2
+    private var colors = [UIColor.black, UIColor.systemPink, UIColor.cyan, UIColor.magenta]
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //MARK: - Initializers
-        createTextView()
-        createFontPicker()
-        createFontsLable()
-        createSizeLabel()
-        createMinSizeButton()
-        createMaxSizeButton()
-        createNightModeLabel()
-        createNightMode()
-        createTextColor()
-        createColorButtons()
-        createShareButton()
-        createSizeSlider()
+        setupViews()
 
-        fontPicker.dataSource = self
-        fontPicker.delegate = self
+        fontUIPIckerView.dataSource = self
+        fontUIPIckerView.delegate = self
     }
 
     //MARK: - Private Methods
-   private func createTextView() {
-    freeFragment.frame = CGRect(x: 20, y: 100, width: view.bounds.width - 40, height: view.bounds.height / 2)
-    freeFragment.text = """
+    private func setupViews() {
+        createfreeFragmentTextView()
+        createFontUIPIckerView()
+        createFontsUILable()
+        createSizeUILabel()
+        createMinSizeUIButton()
+        createMaxSizeUIButton()
+        createNightModeUILabel()
+        createNightModeUISwitch()
+        createTextColorUILabel()
+        createColorsUIButton()
+        createShareUIButton()
+        createSizeUISlider()
+    }
+
+    private func createfreeFragmentTextView() {
+
+        freeFragmentTextView.frame = CGRect(x: 20, y: 100, width: view.bounds.width - 40,
+                                            height: view.bounds.height / 2)
+        freeFragmentTextView.text = """
 In these influential dialogues—Euthyphro, Apology, Crito, Meno, Phaedo, Symposium—Plato employs the dialectic method to
 examine the trial and death of his mentor, Socrates, and address the eternal questions of human existence.
 
@@ -81,176 +87,149 @@ THIS ENRICHED CLASSIC EDITION INCLUDES:
 
 • A list of recommended related books and films to broaden the reader’s experience
 """
-    freeFragment.backgroundColor = .white
-//    freeFragment.font = UIFont(name: curentFont, size: curentSize)
-//    freeFragment.font = .systemFont(ofSize: curentSize, weight: UIFont.Weight.init(CGFloat(weight)))
-    freeFragment.isEditable = false
-    maxSizeButton.addTarget(self, action: #selector(changeWeight(sender:)), for: .valueChanged)
-
-    view.addSubview(freeFragment)
+        freeFragmentTextView.backgroundColor = view.backgroundColor
+        freeFragmentTextView.isEditable = false
+        maxSizeUIButton.addTarget(self, action: #selector(changeWeight(sender:)), for: .valueChanged)
+        view.addSubview(freeFragmentTextView)
     }
 
-    private func createFontPicker() {
-        fontPicker.frame = CGRect(x: 150, y: 700, width: 250, height: 50)
-        view.addSubview(fontPicker)
+    private func createFontUIPIckerView() {
+        fontUIPIckerView.frame = CGRect(x: 150, y: 700, width: 250, height: 50)
+        view.addSubview(fontUIPIckerView)
     }
 
-    private func createFontsLable() {
-        fontsLabel.frame = CGRect(x: 15, y: 700, width: 250, height: 50)
-        fontsLabel.text = "Chose text font"
-        fontsLabel.font = fontsLabel.font.withSize(20)
-        view.addSubview(fontsLabel)
+    private func createFontsUILable() {
+        fontsUILabel.frame = CGRect(x: 15, y: 700, width: 250, height: 50)
+        fontsUILabel.text = "Choose text font"
+        fontsUILabel.font = fontsUILabel.font.withSize(20)
+        view.addSubview(fontsUILabel)
     }
 
-    private func createSizeLabel() {
-        sizeLabel.frame = CGRect(x: 15, y: 750, width: 250, height: 50)
-        sizeLabel.text = "Chose text size"
-        sizeLabel.font = sizeLabel.font.withSize(20)
-        view.addSubview(sizeLabel)
+    private func createSizeUILabel() {
+        sizeUILabel.frame = CGRect(x: 15, y: 750, width: 250, height: 50)
+        sizeUILabel.text = "Choose text size"
+        sizeUILabel.font = sizeUILabel.font.withSize(20)
+        view.addSubview(sizeUILabel)
     }
 
-    private func createMinSizeButton() {
-        minSizeButton.frame = CGRect(x: 200, y: 765, width: 20, height: 20)
-        minSizeButton.setTitle("a", for: .normal)
-        minSizeButton.setTitleColor(.orange, for: .normal)
-        minSizeButton.addTarget(self, action: #selector(changeWeight(sender:)), for: .touchUpInside)
-        view.addSubview(minSizeButton)
+    private func createMinSizeUIButton() {
+        minSizeUIButton.frame = CGRect(x: 200, y: 765, width: 20, height: 20)
+        minSizeUIButton.setTitle("a", for: .normal)
+        minSizeUIButton.setTitleColor(.orange, for: .normal)
+        minSizeUIButton.addTarget(self, action: #selector(changeWeight(sender:)), for: .touchUpInside)
+        view.addSubview(minSizeUIButton)
     }
 
-    private func createMaxSizeButton() {
-        maxSizeButton.frame = CGRect(x: 330, y: 765, width: 20, height: 20)
-        maxSizeButton.setTitle("A", for: .normal)
-        maxSizeButton.setTitleColor(.orange, for: .normal)
-        maxSizeButton.addTarget(self, action: #selector(changeWeight(sender:)), for: .touchUpInside)
-        view.addSubview(maxSizeButton)
+    private func createMaxSizeUIButton() {
+        maxSizeUIButton.frame = CGRect(x: 330, y: 765, width: 20, height: 20)
+        maxSizeUIButton.setTitle("A", for: .normal)
+        maxSizeUIButton.setTitleColor(.orange, for: .normal)
+        maxSizeUIButton.addTarget(self, action: #selector(changeWeight(sender:)), for: .touchUpInside)
+        view.addSubview(maxSizeUIButton)
     }
 
-    private func createNightModeLabel() {
-        nightModeLabel.frame =  CGRect(x: 15, y: 800, width: 250, height: 50)
-        nightModeLabel.text = "Night mode"
-        nightModeLabel.font = nightModeLabel.font.withSize(20)
-        view.addSubview(nightModeLabel)
+    private func createNightModeUILabel() {
+        nightModeUILabel.frame =  CGRect(x: 15, y: 800, width: 250, height: 50)
+        nightModeUILabel.text = "Night mode"
+        nightModeUILabel.font = nightModeUILabel.font.withSize(20)
+        view.addSubview(nightModeUILabel)
     }
 
-    private func createNightMode() {
-        nightMode.frame = CGRect(x: 300, y: 810, width: 0, height: 0)
-        nightMode.isOn = false
-        nightMode.addTarget(self, action: #selector(changeNightMode), for: .valueChanged)
-        view.addSubview(nightMode)
+    private func createNightModeUISwitch() {
+        nightModeUISwitch.frame = CGRect(x: 300, y: 810, width: 0, height: 0)
+        nightModeUISwitch.isOn = false
+        nightModeUISwitch.addTarget(self, action: #selector(changeNightMode), for: .valueChanged)
+        view.addSubview(nightModeUISwitch)
     }
 
-    private func createTextColor() {
-        textColor.frame = CGRect(x: 15, y: 600, width: 250, height: 50)
-        textColor.text = "Text color"
-        textColor.font = nightModeLabel.font.withSize(20)
-        view.addSubview(textColor)
+    private func createTextColorUILabel() {
+        textColorUILabel.frame = CGRect(x: 15, y: 600, width: 250, height: 50)
+        textColorUILabel.text = "Text color"
+        textColorUILabel.font = nightModeUILabel.font.withSize(20)
+        view.addSubview(textColorUILabel)
     }
 
-    private func createColorButtons() {
-        firstColor.frame = CGRect(x: 150, y: 600, width: 50, height: 50)
-        firstColor.layer.cornerRadius = 25
-        firstColor.backgroundColor = .black
-        firstColor.tag = 0
-        firstColor.addTarget(self, action: #selector(changeTextColor(sender:)), for: .touchUpInside)
-        view.addSubview(firstColor)
+    private func createColorsUIButton() {
+        firstColorUIButton.tag = 0
+        firstColorUIButton.frame = CGRect(x: 150, y: 600, width: 50, height: 50)
+        firstColorUIButton.layer.cornerRadius = 25
+        firstColorUIButton.backgroundColor = .black
+        firstColorUIButton.addTarget(self, action: #selector(changeTextColor(sender:)), for: .touchUpInside)
+        view.addSubview(firstColorUIButton)
 
-        secondColor.frame = CGRect(x: 210, y: 600, width: 50, height: 50)
-        secondColor.layer.cornerRadius = 25
-        secondColor.backgroundColor = .systemPink
-        secondColor.tag = 1
-        secondColor.addTarget(self, action: #selector(changeTextColor(sender:)), for: .touchUpInside)
-        view.addSubview(secondColor)
+        secondColorUIButton.tag = 1
+        secondColorUIButton.frame = CGRect(x: 210, y: 600, width: 50, height: 50)
+        secondColorUIButton.layer.cornerRadius = 25
+        secondColorUIButton.backgroundColor = .systemPink
+        secondColorUIButton.addTarget(self, action: #selector(changeTextColor(sender:)), for: .touchUpInside)
+        view.addSubview(secondColorUIButton)
 
-        thirdColor.frame = CGRect(x: 270, y: 600, width: 50, height: 50)
-        thirdColor.layer.cornerRadius = 25
-        thirdColor.backgroundColor = .cyan
-        thirdColor.tag = 2
-        thirdColor.addTarget(self, action: #selector(changeTextColor(sender:)), for: .touchUpInside)
-        view.addSubview(thirdColor)
+        thirdColorUIButton.tag = 2
+        thirdColorUIButton.frame = CGRect(x: 270, y: 600, width: 50, height: 50)
+        thirdColorUIButton.layer.cornerRadius = 25
+        thirdColorUIButton.backgroundColor = .cyan
+        thirdColorUIButton.addTarget(self, action: #selector(changeTextColor(sender:)), for: .touchUpInside)
+        view.addSubview(thirdColorUIButton)
 
-        fourthColor.frame = CGRect(x: 330, y: 600, width: 50, height: 50)
-        fourthColor.layer.cornerRadius = 25
-        fourthColor.backgroundColor = .magenta
-        fourthColor.tag = 3
-        fourthColor.addTarget(self, action: #selector(changeTextColor(sender:)), for: .touchUpInside)
-        view.addSubview(fourthColor)
+        fourthColorUIButton.tag = 3
+        fourthColorUIButton.frame = CGRect(x: 330, y: 600, width: 50, height: 50)
+        fourthColorUIButton.layer.cornerRadius = 25
+        fourthColorUIButton.backgroundColor = .magenta
+        fourthColorUIButton.addTarget(self, action: #selector(changeTextColor(sender:)), for: .touchUpInside)
+        view.addSubview(fourthColorUIButton)
     }
 
-    private func createShareButton() {
-        shareButton.frame =  CGRect(x: 340, y: 50, width: 50, height: 50)
-        shareButton.setImage(shareImage, for: .normal)
-        shareButton.tintColor = .black
-        shareButton.addTarget(self, action: #selector(share), for: .touchUpInside)
-        view.addSubview(shareButton)
+    private func createShareUIButton() {
+        shareUIButton.frame =  CGRect(x: 340, y: 50, width: 50, height: 50)
+        shareUIButton.setImage(shareUIImage, for: .normal)
+        shareUIButton.tintColor = .black
+        shareUIButton.addTarget(self, action: #selector(share), for: .touchUpInside)
+        view.addSubview(shareUIButton)
     }
 
-    private func createSizeSlider() {
-        sizeSlider.frame = CGRect(x: 15, y: 560, width: 380, height: 10)
-        sizeSlider.thumbTintColor = .cyan
-        sizeSlider.minimumValue = 0
-        sizeSlider.maximumValue = 100
-        sizeSlider.value = 10
-        sizeSlider.addTarget(self, action: #selector(sizeChanged(sender:)), for: .valueChanged)
-        self.view.addSubview(sizeSlider)
+    private func createSizeUISlider() {
+        sizeUISlider.frame = CGRect(x: 15, y: 560, width: 380, height: 10)
+        sizeUISlider.thumbTintColor = .cyan
+        sizeUISlider.minimumValue = 0
+        sizeUISlider.maximumValue = 100
+        sizeUISlider.value = 10
+        sizeUISlider.addTarget(self, action: #selector(sizeChanged(sender:)), for: .valueChanged)
+        self.view.addSubview(sizeUISlider)
     }
 
     @objc private func changeWeight(sender: UIButton) {
         switch sender {
-        case minSizeButton:
+        case minSizeUIButton:
             weight -= 0.15
-        case maxSizeButton:
+        case maxSizeUIButton:
             weight += 0.15
         default:
             return
         }
-        freeFragment.font = UIFont.systemFont(ofSize: freeFragment.font?.pointSize ?? 15, weight: UIFont.Weight
-                                                .init(CGFloat(weight)))
+        freeFragmentTextView.font = UIFont.systemFont(ofSize: freeFragmentTextView.font?.pointSize ?? 15,
+                                                      weight: UIFont.Weight.init(CGFloat(weight)))
     }
 
     @objc private func changeNightMode(sender: UISwitch) {
-         switch sender.isOn {
-         case true:
+        view.overrideUserInterfaceStyle = nightModeUISwitch.isOn ?  .dark : .light
+        if nightModeUISwitch.isOn {
             view.backgroundColor = .black
-            freeFragment.backgroundColor = .black
-            freeFragment.textColor = .white
-            fontsLabel.textColor = .white
-            sizeLabel.textColor = .white
-            nightModeLabel.textColor = .white
-            fontPicker.backgroundColor = .white
-            textColor.textColor = .white
-         case false:
+        } else {
             view.backgroundColor = .white
-            freeFragment.backgroundColor = .white
-            freeFragment.textColor = .black
-            fontsLabel.textColor = .black
-            sizeLabel.textColor = .black
-            nightModeLabel.textColor = .black
-            fontPicker.backgroundColor = .white
-            textColor.textColor = .black
-         }
+        }
      }
 
     @objc private func changeTextColor(sender: UIButton) {
-        switch sender.tag {
-        case 0:
-            freeFragment.textColor = .black
-        case 1:
-            freeFragment.textColor = .systemPink
-        case 2:
-            freeFragment.textColor = .cyan
-        case 3:
-            freeFragment.textColor = .magenta
-        default: break
-        }
+        freeFragmentTextView.textColor = colors[sender.tag]
     }
 
     @objc private func share() {
-        let vc = UIActivityViewController(activityItems: [freeFragment.text ?? ""], applicationActivities: nil)
+        let vc = UIActivityViewController(activityItems: [freeFragmentTextView.text ?? ""], applicationActivities: nil)
         present(vc, animated: true, completion: nil)
     }
 
     @objc private func sizeChanged(sender: UISlider) {
-        freeFragment.font = UIFont(name: curentFont, size: CGFloat(Int(sender.value)))
+        freeFragmentTextView.font = UIFont(name: curentFont, size: CGFloat(Int(sender.value)))
     }
 }
 
@@ -258,37 +237,24 @@ THIS ENRICHED CLASSIC EDITION INCLUDES:
 
 //MARK: - extension for UIPickerViewDataSource
 extension FreeFragmentController: UIPickerViewDataSource {
-     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-         return fonts.count
-     }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return fonts.count
+    }
 
-     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-         return 1
-     }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
 
-     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-         return fonts[row]
-     }
- }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return fonts[row]
+    }
+}
 
 //MARK: - extension for UIPickerViewDelegate
 extension FreeFragmentController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch fonts[row] {
-        case "Bradley Hand":
-            freeFragment.font = UIFont(name: "Bradley Hand", size: freeFragment.font?.pointSize ?? 15)
-            curentFont = "Bradley Hand"
-        case "Papyrus":
-            freeFragment.font = UIFont(name: "Papyrus", size: freeFragment.font?.pointSize ?? 15)
-            curentFont = "Papyrus"
-        case "Times New Roman":
-            freeFragment.font = UIFont(name: "Times New Roman", size: freeFragment.font?.pointSize ?? 15)
-            curentFont = "Times New Roman"
-        case "Zapfino":
-            freeFragment.font = UIFont(name: "Zapfino", size: freeFragment.font?.pointSize ?? 15)
-            curentFont = "Zapfino"
-        default: break
-        }
+        freeFragmentTextView.font = UIFont(name: fonts[row], size: CGFloat(curentSize))
+
     }
 }
 

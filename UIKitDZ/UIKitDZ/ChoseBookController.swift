@@ -10,54 +10,53 @@ import UIKit
 final class ChosenBookController: UIViewController {
 
     //MARK: - Visual Components
-    private var logo = UIImageView(image: UIImage(named: "logobook"))
-    private var slogan = UILabel()
-    private var bookImage = UIImageView(image: UIImage(named: "platon"))
-    private var button = UIButton()
+    private var logoImageView = UIImageView(image: UIImage(named: "logobook"))
+    private var sloganLabel = UILabel()
+    private var bookImageView = UIImageView(image: UIImage(named: "platon"))
+    private var enterUIButton = UIButton()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //MARK: - Initializers
-        createLogo()
-        createSlogan()
-        createImage()
-        createButton()
+        createLogoImageView()
+        createSloganLabel()
+        createBookImageView()
+        createEnterUIButton()
     }
 
     //MARK: - Private Methods
-    private func createLogo() {
-        logo.frame = CGRect(x: 110, y: 50, width: 200, height: 200)
-        logo.contentMode = .scaleAspectFill
-        view.addSubview(logo)
+    private func createLogoImageView() {
+        logoImageView.frame = CGRect(x: 110, y: 50, width: 200, height: 200)
+        logoImageView.contentMode = .scaleAspectFill
+        view.addSubview(logoImageView)
     }
 
-    private func createSlogan() {
-        slogan.frame = CGRect(x: 60, y: 210, width: 300, height: 50)
-        slogan.text = "Don`t be dummy - read books"
-        slogan.textColor = .black
-        slogan.font = slogan.font.withSize(22)
-        slogan.textAlignment = .center
-        view.addSubview(slogan)
+    private func createSloganLabel() {
+        sloganLabel.frame = CGRect(x: 60, y: 210, width: 300, height: 50)
+        sloganLabel.text = "Don`t be dummy - read books"
+        sloganLabel.textColor = .black
+        sloganLabel.font = sloganLabel.font.withSize(22)
+        sloganLabel.textAlignment = .center
+        view.addSubview(sloganLabel)
     }
 
-    private func createImage() {
-        bookImage.frame = CGRect(x: 110, y: 400, width: 200, height: 150)
-        bookImage.contentMode = .scaleAspectFill
-        view.addSubview(bookImage)
+    private func createBookImageView() {
+        bookImageView.frame = CGRect(x: 110, y: 400, width: 200, height: 150)
+        bookImageView.contentMode = .scaleAspectFill
+        view.addSubview(bookImageView)
     }
 
-    private func createButton() {
-        button.frame = CGRect(x: 85, y: 750, width: 250, height: 30)
-        button.setTitle("Show free fragment", for: .normal)
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .systemPink
-        button.addTarget(self, action: #selector(showFreeFragment), for: .touchUpInside)
-        view.addSubview(button)
+    private func createEnterUIButton() {
+        enterUIButton.frame = CGRect(x: 85, y: 750, width: 250, height: 30)
+        enterUIButton.setTitle("Show free fragment", for: .normal)
+        enterUIButton.layer.cornerRadius = 10
+        enterUIButton.backgroundColor = .systemPink
+        enterUIButton.addTarget(self, action: #selector(showFreeFragmentController), for: .touchUpInside)
+        view.addSubview(enterUIButton)
     }
 
-    @objc private func showFreeFragment() {
+    @objc private func showFreeFragmentController() {
         let secondVc = FreeFragmentController()
         secondVc.modalPresentationStyle = .fullScreen
         secondVc.modalTransitionStyle = .partialCurl
