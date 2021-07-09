@@ -31,6 +31,7 @@ final class TimerController: UIViewController {
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
         }
     }
+
     @IBAction private func resetActionButton(_ sender: Any) {
         counting = 0
         timer.invalidate()
@@ -45,9 +46,11 @@ final class TimerController: UIViewController {
         let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
         timerUILable.text = timeString
     }
+
     private func timerRunning(seconds: Int) -> (Int, Int, Int) {
         return ((seconds / 3600), ((seconds % 3600) / 60), ((seconds % 3600) % 60))
     }
+
     private func makeTimeString(hours: Int, minutes: Int, seconds: Int) -> String {
         var timeString = ""
         timeString += String(format: "%02d", hours)
