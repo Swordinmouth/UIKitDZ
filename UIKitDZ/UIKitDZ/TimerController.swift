@@ -19,7 +19,6 @@ final class TimerController: UIViewController {
     private var counting = 0
     private var timerCounting = true
 
-
     //MARK: - IBAction
     @IBAction private func startStopActionButton(_ sender: Any) {
         if timerCounting {
@@ -38,7 +37,6 @@ final class TimerController: UIViewController {
         timerUILable.text = makeTimeString(hours: 0, minutes: 0, seconds: 0)
         startStopUIButton.setImage(UIImage(systemName: "timer"), for: .normal)
     }
-
 
     //MARK: - Private Methods
     @objc private func timerCounter() {
